@@ -150,8 +150,11 @@ test('fetch a big repository', async () => {
   const fetch = createGitFetcher({ rawConfig: {} }).git
   const { filesIndex } = await fetch(createCafsStore(storeDir),
     {
-      commit: 'a65fbf5a90f53c9d72fed4daaca59da50f074355',
-      repo: 'https://github.com/sveltejs/action-deploy-docs.git',
+      // Repointed from sveltejs/action-deploy-docs: that commit became orphaned upstream
+      // (served by SHA but unreachable from any branch, so the full clone this test does
+      // can't fetch it). Use a commit reachable from benmccann/action-deploy-docs.
+      commit: 'ef4db5cf325a5c6d2d492c6fb4492ebf455e06ff',
+      repo: 'https://github.com/benmccann/action-deploy-docs.git',
       type: 'git',
     }, {
       filesIndexFile: path.join(storeDir, 'index.json'),
